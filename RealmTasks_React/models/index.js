@@ -1,4 +1,4 @@
-////////////////////////////////////////////////////////////////////////////
+// //////////////////////////////////////////////////////////////////////////
 //
 // Copyright 2016 Realm Inc.
 //
@@ -14,30 +14,29 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
-////////////////////////////////////////////////////////////////////////////
+// //////////////////////////////////////////////////////////////////////////
 
 'use strict';
 
 import Realm from 'realm';
-import config from '../config';
 
 export class Task extends Realm.Object {}
 Task.schema = {
-    name: 'Task',
-    properties: {
-        completed: {type: 'bool', default: false},
-        text: 'string',
-    },
+  name: 'Task',
+  properties: {
+    completed: { type: 'bool', default: false },
+    text: 'string',
+  },
 };
 
 export class TaskList extends Realm.Object {}
 TaskList.schema = {
-    name: 'TaskList',
-    properties: {
-        id: 'string',
-        text: 'string',
-        completed: {type: 'bool', default: false},
-        items: {type: 'list', objectType: 'Task'},
-    },
-    primaryKey: 'id'
+  name: 'TaskList',
+  properties: {
+    id: 'string',
+    text: 'string',
+    completed: { type: 'bool', default: false },
+    items: { type: 'list', objectType: 'Task' },
+  },
+  primaryKey: 'id',
 };

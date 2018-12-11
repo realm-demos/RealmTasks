@@ -1,4 +1,4 @@
-////////////////////////////////////////////////////////////////////////////
+// //////////////////////////////////////////////////////////////////////////
 //
 // Copyright 2016 Realm Inc.
 //
@@ -14,7 +14,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
-////////////////////////////////////////////////////////////////////////////
+// //////////////////////////////////////////////////////////////////////////
 
 'use strict';
 
@@ -31,65 +31,65 @@ import {
 import RealmTasks from '../realm-tasks';
 import styles from './styles';
 
-const iOS = (Platform.OS == 'ios');
+const iOS = (Platform.OS === 'ios');
 
 export default class TodoListItem extends React.Component {
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
 
-        this._onChangeText = this._onChangeText.bind(this);
-    }
+    this._onChangeText = this._onChangeText.bind(this);
+  }
 
-    get completed() {
-        let items = this.props.item.items;
-        return items.length > 0 && items.every((item) => item.completed);
-    }
+  get completed() {
+    const items = this.props.item.items;
+    return items.length > 0 && items.every(item => item.completed);
+  }
 
-    get text() {
-        return this.props.item.text;
-    }
+  get text() {
+    return this.props.item.text;
+  }
 
-    set text(text) {
-        this.props.item.text = text;
-    }
+  set text(text) {
+    this.props.item.text = text;
+  }
 
-    componentDidMount() {
+  componentDidMount() {
         // The autoFocus prop on TextInput was not working for us :(
-        this._focusInputIfNecessary();
-    }
+    this._focusInputIfNecessary();
+  }
 
-    componentDidUpdate() {
-        this._focusInputIfNecessary();
-    }
+  componentDidUpdate() {
+    this._focusInputIfNecessary();
+  }
 
 
-    render() {
-        const i8 = this.props.index<7 ? this.props.index : 6;
-        return (
-            <View style={ [ styles.listItem, styles['realmColor'+i8] ] }>
+  render() {
+    const i8 = this.props.index < 7 ? this.props.index : 6;
+    return (
+            <View style={ [styles.listItem, styles[`realmColor${i8}`]] }>
                 {this.renderLeftSide()}
                 {this.renderText()}
                 {this.renderRightSide()}
             </View>
-        );
-    }
+    );
+  }
 
-    renderLeftSide() {
-        return (
+  renderLeftSide() {
+    return (
             <View style={styles.listItemLeftSide}>
                 <Text>{this.completed ? '✓' : '⁃'}</Text>
             </View>
-        );
-    }
+    );
+  }
 
-    renderRightSide() {
+  renderRightSide() {
         // Only show the delete button while not editing the text.
-        return this.props.editing ? null : this.renderDelete();
-    }
+    return this.props.editing ? null : this.renderDelete();
+  }
 
-    renderText(extraStyle) {
-        if (this.props.editing) {
-            return (
+  renderText(extraStyle) {
+    if (this.props.editing) {
+      return (
                 <TextInput
                     ref="input"
                     value={this.text}
@@ -98,45 +98,44 @@ export default class TodoListItem extends React.Component {
                     onChangeText={this._onChangeText}
                     onEndEditing={this.props.onEndEditing}
                     enablesReturnKeyAutomatically={true} />
-            );
-        } else {
-            return (
+      );
+    }
+    return (
                 <Text
                     style={[styles.listItemText, extraStyle]}
                     onPress={this.props.onPress}
                     suppressHighlighting={true}>
                     {this.text}
                 </Text>
-            );
-        }
-    }
+    );
+  }
 
-    renderDelete() {
-        return (
+  renderDelete() {
+    return (
             <TouchableWithoutFeedback onPress={this.props.onPressDelete}>
                 <View style={styles.listItemDelete}>
                     <Text>{iOS ? '𐄂' : '×'}</Text>
                 </View>
             </TouchableWithoutFeedback>
-        );
+    );
+  }
+
+  _onChangeText(text) {
+    RealmTasks.realm.write(() => {
+      this.text = text;
+    });
+
+    this.forceUpdate();
+  }
+
+  _focusInputIfNecessary() {
+    if (!this.props.editing) {
+      return;
     }
 
-    _onChangeText(text) {
-        RealmTasks.realm.write(() => {
-            this.text = text;
-        });
-
-        this.forceUpdate();
+    const input = this.refs.input;
+    if (!input.isFocused()) {
+      input.focus();
     }
-
-    _focusInputIfNecessary() {
-        if (!this.props.editing) {
-            return;
-        }
-
-        let input = this.refs.input;
-        if (!input.isFocused()) {
-            input.focus();
-        }
-    }
+  }
 }

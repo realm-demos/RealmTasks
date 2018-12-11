@@ -3,6 +3,7 @@
     "commonjs": true,
     "es6": true
   },
+  "extends": "airbnb-base",
   "globals": {
     "cancelAnimationFrame": false,
     "clearImmediate": false,

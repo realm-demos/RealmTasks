@@ -1,4 +1,4 @@
-////////////////////////////////////////////////////////////////////////////
+// //////////////////////////////////////////////////////////////////////////
 //
 // Copyright 2016 Realm Inc.
 //
@@ -14,65 +14,65 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
-////////////////////////////////////////////////////////////////////////////
+// //////////////////////////////////////////////////////////////////////////
 
 'use strict';
 
 import React from 'react';
-import { AsyncStorage, Text, TextInput, View, Button } from 'react-native';
+import { Text, TextInput, View, Button } from 'react-native';
 import styles from './styles';
 import TodoApp from './todo-app';
 import config from '../config';
 import RealmTasks from '../realm-tasks';
 
 export default class LoginScreen extends React.Component {
-    constructor (props) {
-        super(props);
-        this.state = { login: config.login, password: config.password, error: null };
-        this.user = null;
-    }
+  constructor(props) {
+    super(props);
+    this.state = { login: config.login, password: config.password, error: null };
+    this.user = null;
+  }
 
-    login () {
-        RealmTasks.login(
+  login() {
+    RealmTasks.login(
             this.state.login,
             this.state.password,
             (error, realm) => {
-                RealmTasks.realm = realm;
-                this.setState({
-                    error: error ? error.message : "Success"
-                });
-            }
+              RealmTasks.realm = realm;
+              this.setState({
+                error: error ? error.message : 'Success',
+              });
+            },
         );
-    }
+  }
 
-    register () {
-        RealmTasks.register(
+  register() {
+    RealmTasks.register(
             this.state.login,
             this.state.password,
             (error, realm) => {
-                RealmTasks.realm = realm;
-                this.setState({
-                    error: error ? error.message : "Success"
-                });
-            }
+              RealmTasks.realm = realm;
+              this.setState({
+                error: error ? error.message : 'Success',
+              });
+            },
         );
-    }
+  }
 
-    render () {
-        if (RealmTasks.realm) return <TodoApp/>; // logged in already
+  render() {
+    if (RealmTasks.realm) return <TodoApp/>; // logged in already
 
-        return (
+    return (
             <View style={[styles.loginView]}>
                 <View>
-                    <Text style={[styles.loginRow,styles.loginTitle]}>RealmTasks</Text>
+                    <Text style={[styles.loginRow, styles.loginTitle]}>RealmTasks</Text>
                 </View>
                 <View>
-                    <TextInput style={[styles.loginRow,styles.loginInput1]}
+                    <TextInput style={[styles.loginRow, styles.loginInput1]}
                         value={this.state.login}
                         onChangeText={ login => this.setState({
-                            login,
-                            password: this.state.password,
-                            error: null
+                          login,
+                          password: this.state.password,
+                          error: null,
                         }) }
                         editable = {true}
                         placeholder = "Username"
@@ -81,12 +81,12 @@ export default class LoginScreen extends React.Component {
                 </View>
                 <View>
                     <TextInput
-                        style={[styles.loginRow,styles.loginInput2]}
+                        style={[styles.loginRow, styles.loginInput2]}
                         value={this.state.password}
                         onChangeText={ password => this.setState({
-                            login: this.state.login,
-                            password,
-                            error: null
+                          login: this.state.login,
+                          password,
+                          error: null,
                         }) }
                         editable = {true}
                         placeholder = "Password"
@@ -106,9 +106,11 @@ export default class LoginScreen extends React.Component {
                     <Button title="Register" onPress={ this.register.bind(this) } />
                 </View>
                 <View>
-                    <Text style={[styles.loginRow,styles.loginErrorLabel]}>{this.state.error}</Text>
+                    <Text style={[styles.loginRow, styles.loginErrorLabel]}>
+                        {this.state.error}
+                    </Text>
                 </View>
             </View>
-        );
-    }
-};
+    );
+  }
+}

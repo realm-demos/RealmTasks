@@ -1,4 +1,4 @@
-////////////////////////////////////////////////////////////////////////////
+// //////////////////////////////////////////////////////////////////////////
 //
 // Copyright 2016 Realm Inc.
 //
@@ -14,7 +14,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
-////////////////////////////////////////////////////////////////////////////
+// //////////////////////////////////////////////////////////////////////////
 
 'use strict';
 
@@ -31,30 +31,30 @@ import RealmTasks from '../realm-tasks';
 import styles from './styles';
 
 export default class TodoItem extends TodoListItem {
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
 
-        this._onPressCheckbox = this._onPressCheckbox.bind(this);
-    }
+    this._onPressCheckbox = this._onPressCheckbox.bind(this);
+  }
 
-    get completed() {
-        return this.props.item.completed;
-    }
+  get completed() {
+    return this.props.item.completed;
+  }
 
-    set completed(done) {
-        this.props.item.completed = done;
-    }
+  set completed(done) {
+    this.props.item.completed = done;
+  }
 
-    get text() {
-        return this.props.item.text;
-    }
+  get text() {
+    return this.props.item.text;
+  }
 
-    set text(text) {
-        this.props.item.text = text;
-    }
+  set text(text) {
+    this.props.item.text = text;
+  }
 
-    renderLeftSide() {
-        return (
+  renderLeftSide() {
+    return (
             <TouchableWithoutFeedback onPress={this._onPressCheckbox}>
                 <View style={styles.listItemLeftSide}>
                     <View style={styles.listItemCheckbox}>
@@ -64,14 +64,14 @@ export default class TodoItem extends TodoListItem {
                     </View>
                 </View>
             </TouchableWithoutFeedback>
-        );
-    }
+    );
+  }
 
-    _onPressCheckbox() {
-        RealmTasks.realm.write(() => {
-            this.completed = !this.completed;
-        });
+  _onPressCheckbox() {
+    RealmTasks.realm.write(() => {
+      this.completed = !this.completed;
+    });
 
-        this.forceUpdate();
-    }
+    this.forceUpdate();
+  }
 }
