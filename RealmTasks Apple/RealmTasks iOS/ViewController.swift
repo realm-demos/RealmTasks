@@ -56,7 +56,13 @@ final class ViewController<Item, Parent: Object>: UIViewController, UIGestureRec
 
     // Scrolling
     private var distancePulledDown: CGFloat {
-        return -tableView.contentOffset.y - tableView.contentInset.top
+        let contentInset: UIEdgeInsets
+        if #available(iOS 11.0, *) {
+            contentInset = tableView.adjustedContentInset
+        } else {
+            contentInset = tableView.contentInset
+        }
+        return -tableView.contentOffset.y - contentInset.top
     }
     private var distancePulledUp: CGFloat {
         return tableView.contentOffset.y + tableView.bounds.size.height - max(tableView.bounds.size.height, tableView.contentSize.height)
@@ -191,9 +197,9 @@ final class ViewController<Item, Parent: Object>: UIViewController, UIGestureRec
 
     private func startMovingToNextViewController(direction: NavDirection) {
         let nextVC = direction == .up ? topViewController! : bottomViewController!
-        let parentVC = parent!
+        let parentVC = parent as! ContainerViewController
         parentVC.addChildViewController(nextVC)
-        parentVC.view.insertSubview(nextVC.view, at: 1)
+        parentVC.containerView.insertSubview(nextVC.view, at: 1)
         view.removeAllConstraints()
         nextConstraints = constrain(nextVC.view, tableViewContentView) { nextView, tableViewContentView in
             nextView.size == nextView.superview!.size

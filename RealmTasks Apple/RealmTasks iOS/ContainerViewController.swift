@@ -21,17 +21,20 @@ import RealmSwift
 import UIKit
 
 class ContainerViewController: UIViewController {
-    private var titleLabel = UILabel()
-    private var titleTopConstraint: NSLayoutConstraint?
+    @IBOutlet private var titleBar: UIView!
+    @IBOutlet private var titleLabel: UILabel!
+    @IBOutlet private var titleHeightConstraint: NSLayoutConstraint?
+    @IBOutlet var containerView: UIView!
+
     override var title: String? {
         didSet {
             if let title = title {
                 titleLabel.text = title
             }
-            titleTopConstraint?.constant = (title != nil) ? 20 : 0
+            titleHeightConstraint?.constant = (title != nil) ? 20 : 0
             UIView.animate(withDuration: 0.2) {
                 self.titleLabel.alpha = (self.title != nil) ? 1 : 0
-                self.titleLabel.superview?.layoutIfNeeded()
+                self.titleBar.layoutIfNeeded()
             }
         }
     }
@@ -48,34 +51,17 @@ class ContainerViewController: UIViewController {
 
     private func addChildVC() {
         let firstList = try! Realm().objects(TaskList.self).first!
+        UIView.performWithoutAnimation {
+            title = firstList.text
+        }
+
         let vc = ViewController(parent: firstList, colors: UIColor.taskColors())
-        title = firstList.text
         addChildViewController(vc)
-        view.addSubview(vc.view)
+        containerView.addSubview(vc.view)
         vc.didMove(toParentViewController: self)
     }
 
     private func setupTitleBar() {
-        let titleBar = UIToolbar()
-        titleBar.barStyle = .blackTranslucent
-        view.addSubview(titleBar)
-        constrain(titleBar) { titleBar in
-            titleBar.left == titleBar.superview!.left
-            titleBar.top == titleBar.superview!.top
-            titleBar.right == titleBar.superview!.right
-            titleBar.height >= 20
-            titleBar.height == 20
-        }
-
         titleLabel.font = .boldSystemFont(ofSize: 13)
-        titleLabel.textAlignment = .center
-        titleLabel.textColor = .white
-        titleBar.addSubview(titleLabel)
-        constrain(titleLabel) { titleLabel in
-            titleLabel.left == titleLabel.superview!.left
-            titleLabel.right == titleLabel.superview!.right
-            titleLabel.bottom == titleLabel.superview!.bottom - 5
-            titleTopConstraint = (titleLabel.top == titleLabel.superview!.top + 20)
-        }
     }
 }

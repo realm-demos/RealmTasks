@@ -73,12 +73,11 @@ UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate where Pa
             tableView.bottom == tableView.superview!.bottom
             tableView.left == tableView.superview!.left
         }
+
         tableView.register(TableViewCell<Parent.Item>.self, forCellReuseIdentifier: "cell")
         tableView.separatorStyle = .none
         tableView.backgroundColor = .black
         tableView.rowHeight = 54
-        tableView.contentInset = UIEdgeInsets(top: (title != nil) ? 41 : 20, left: 0, bottom: 54, right: 0)
-        tableView.contentOffset = CGPoint(x: 0, y: -tableView.contentInset.top)
         tableView.showsVerticalScrollIndicator = false
 
         view.addSubview(tableViewContentView)
@@ -295,15 +294,15 @@ UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate where Pa
         placeHolderCell.backgroundView!.backgroundColor = color(forRow: 0)
         placeHolderCell.layer.anchorPoint = CGPoint(x: 0.5, y: 1)
         tableView.addSubview(placeHolderCell)
+
         constrain(placeHolderCell) { placeHolderCell in
-            placeHolderCell.bottom == placeHolderCell.superview!.topMargin + 31//- 7 + 30
+            placeHolderCell.bottom == placeHolderCell.superview!.top + tableView.rowHeight / 2
             placeHolderCell.left == placeHolderCell.superview!.superview!.left
             placeHolderCell.right == placeHolderCell.superview!.superview!.right
-            placeHolderCell.height == tableView.rowHeight
         }
-
         constrain(placeHolderCell.contentView, placeHolderCell) { contentView, placeHolderCell in
             contentView.edges == placeHolderCell.edges
+            contentView.height == tableView.rowHeight
         }
     }
 

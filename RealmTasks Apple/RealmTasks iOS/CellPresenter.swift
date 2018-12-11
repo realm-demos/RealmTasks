@@ -82,10 +82,6 @@ class CellPresenter<Item: Object> where Item: CellPresentable {
 
         currentlyEditingIndexPath = tableView.indexPath(for: editingCell)
 
-        let editingOffset = editingCell.convert(editingCell.bounds, to: tableView).origin.y - tableView.contentOffset.y - tableView.contentInset.top
-        viewController.setTopConstraint(to: -editingOffset)
-        tableView.contentInset.bottom += editingOffset
-
         viewController.setPlaceholderAlpha(to: 0)
         tableView.bounces = false
 
@@ -104,8 +100,6 @@ class CellPresenter<Item: Object> where Item: CellPresentable {
         currentlyEditingIndexPath = nil
         let tableView = viewController.tableView
 
-        tableView.contentInset.bottom = 54
-        viewController.setTopConstraint(to: 0)
         UIView.animate(withDuration: 0.3) {
             for cell in tableView.visibleCells where cell !== editingCell {
                 cell.alpha = 1

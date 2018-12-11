@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		143C81E21D65D1AA00E872E6 /* RealmTasksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143C81E11D65D1AA00E872E6 /* RealmTasksTests.swift */; };
+		14DA00CC1FD078D600980C2B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14DA00CA1FD078D600980C2B /* Main.storyboard */; };
+		14DA00CE1FD07C6F00980C2B /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DA00CD1FD07C6F00980C2B /* RootViewController.swift */; };
 		2163F0E9852950CD8D643708 /* Pods_RealmTasks_RealmTasks_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32FAE3E2816E19668BE587C1 /* Pods_RealmTasks_RealmTasks_macOS.framework */; };
 		22092D861D5C5BCB0016E757 /* NavHintView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22092D851D5C5BCB0016E757 /* NavHintView.swift */; };
 		220C334A1D3DE1F40043A885 /* OnboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220C33491D3DE1F40043A885 /* OnboardView.swift */; };
@@ -70,6 +72,8 @@
 		143C81DF1D65D1AA00E872E6 /* RealmTasks iOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "RealmTasks iOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		143C81E11D65D1AA00E872E6 /* RealmTasksTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmTasksTests.swift; sourceTree = "<group>"; };
 		143C81E31D65D1AA00E872E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		14DA00CB1FD078D600980C2B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		14DA00CD1FD07C6F00980C2B /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RootViewController.swift; path = Classes/RootViewController.swift; sourceTree = "<group>"; };
 		17DA89361AD60841411CAFF7 /* Pods-RealmTasks-RealmTasks iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RealmTasks-RealmTasks iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RealmTasks-RealmTasks iOS/Pods-RealmTasks-RealmTasks iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		22092D851D5C5BCB0016E757 /* NavHintView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavHintView.swift; sourceTree = "<group>"; };
 		220C33491D3DE1F40043A885 /* OnboardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardView.swift; sourceTree = "<group>"; };
@@ -170,7 +174,9 @@
 				225201941D3DD648009E45FA /* AppDelegate.swift */,
 				225201981D3DD648009E45FA /* Info.plist */,
 				225201951D3DD648009E45FA /* iOS.xcassets */,
+				14DA00CA1FD078D600980C2B /* Main.storyboard */,
 				225201961D3DD648009E45FA /* LaunchScreen.storyboard */,
+				14DA00CD1FD07C6F00980C2B /* RootViewController.swift */,
 				E8A1E64F1D59354500D8B04A /* ContainerViewController.swift */,
 				9CDF4F201D9E780100EC051B /* Views */,
 				9C24AA031D8FED0800192CE3 /* ViewController */,
@@ -437,6 +443,7 @@
 				2252019F1D3DD648009E45FA /* iOS.xcassets in Resources */,
 				225201A01D3DD648009E45FA /* LaunchScreen.storyboard in Resources */,
 				C23EB02D1D4635C400D3E0AC /* Shared.xcassets in Resources */,
+				14DA00CC1FD078D600980C2B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -674,6 +681,7 @@
 				9C24AA071D8FEEB500192CE3 /* CellPresenter.swift in Sources */,
 				C23EB0381D4643B900D3E0AC /* Constants.swift in Sources */,
 				225201A31D3DD648009E45FA /* TableViewCell.swift in Sources */,
+				14DA00CE1FD07C6F00980C2B /* RootViewController.swift in Sources */,
 				E8A1E6501D59354500D8B04A /* ContainerViewController.swift in Sources */,
 				9C24AA0D1D8FFEA200192CE3 /* ListPresenter.swift in Sources */,
 				9CDF4F1F1D9E745300EC051B /* UIView+constraints.swift in Sources */,
@@ -697,6 +705,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		14DA00CA1FD078D600980C2B /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				14DA00CB1FD078D600980C2B /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
 		225201961D3DD648009E45FA /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
